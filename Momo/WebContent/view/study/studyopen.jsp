@@ -168,25 +168,39 @@
 			<div class="form-group">
 			<label for="study_region" class="col-sm-3 col-sm-offset-1 control-label"> 지역  </label>  
 					<div class="col-sm-5">
-						<input type="radio" name="study_region" value="강남" /> 강남 
+							<input type="radio" name="study_region" value="강남" /> 강남 
 						<input type="radio" name="study_region" value="역삼" /> 역삼
 						<input type="radio" name="study_region" value="건대" /> 건대
 						<input type="radio" name="study_region" value="홍대" /> 홍대
 						<input type="radio" name="study_region" value="종로" /> 종로
 						<input type="radio" name="study_region" value="영등포" /> 영등포
 						<input type="radio" name="study_region" value="잠실" /> 잠실
-						<input type="radio" name="study_region" value="노원" /> 노원
-						<input type="radio" name="study_region" value="하남" /> 하남		
 						<input type="radio" name="study_region" value="인천" /> 인천
+						<input type="radio" name="study_region" value="노원" /> 노원
+						<input type="radio" name="study_region" value="경기" /> 경기
+						<input type="radio" name="study_region" value="남양주" /> 남양주
+						<input type="radio" name="study_region" value="의정부" /> 의정부
+						<input type="radio" name="study_region" value="일산" /> 일산
+						<input type="radio" name="study_region" value="하남" /> 하남		
 						<input type="radio" name="study_region" value="김포" /> 김포   
 						<input type="radio" name="study_region" value="분당" /> 분당
 						<input type="radio" name="study_region" value="수원" /> 수원
 						<input type="radio" name="study_region" value="시흥" /> 시흥
+						<input type="radio" name="study_region" value="김포" /> 김포
+						<input type="radio" name="study_region" value="울산" /> 울산
+						<input type="radio" name="study_region" value="부산" /> 부산
+						<input type="radio" name="study_region" value="강원" /> 강원
 						<input type="radio" name="study_region" value="대구" /> 대구
 						<input type="radio" name="study_region" value="대전" /> 대전
-						<input type="radio" name="study_region" value="부산" /> 부산
-						<input type="radio" name="study_region" value="김포" /> 부산   
-						
+						<input type="radio" name="study_region" value="충북" /> 충북
+						<input type="radio" name="study_region" value="충남" /> 충남
+						<input type="radio" name="study_region" value="천안" /> 천안
+						<input type="radio" name="study_region" value="전북" /> 전북
+						<input type="radio" name="study_region" value="전남" /> 전남
+						<input type="radio" name="study_region" value="경북" /> 경북
+						<input type="radio" name="study_region" value="경남" /> 경남
+						<input type="radio" name="study_region" value="제주" /> 제주
+						<input type="radio" name="study_region" value="세종" /> 세종
 					</div>
 			</div>		
 			<div class="form-group">

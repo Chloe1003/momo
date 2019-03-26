@@ -18,6 +18,13 @@ public interface BookmarkDao {
 	// 페이징된 북마크 리스트 반환
 	public List selectBookmarkPagingList(int u_no, Paging paging);
 	
+	// jh-------------------------------------------
 	
+	// 북마크 db삽입(준환추가)
+	public void insertBookmark(Bookmark bookmark);
+	// 북마크 db삭제(준환추가)
+	public void deleteBookmark(Bookmark bmark);
+
+	// -------------------------------------------------
 }
 

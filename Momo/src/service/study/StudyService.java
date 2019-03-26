@@ -2,13 +2,12 @@
 package service.study;
 
 import java.util.List;
-import dto.Study;
-import dto.StudyCategory;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import dao.study.StudyDaoImpl;
-import dto.FileUpload;
 
+import dto.Study;
+import dto.StudyCategory;
 
 public interface StudyService {
 
@@ -19,8 +18,22 @@ public interface StudyService {
 	public List<Study> getHurryStudy();
 
 	public List<Study> getCateStudyList(int category_code);
+	
+	// jh ----------------------------------------------------
+	public List getList();
+
+	// CHECK BOX, SELECT한 요청 파라미터 받기
+	public Study getConditionedParam(HttpServletRequest request, HttpServletResponse response);
+
+	// 조건검색해서 가져온 값 띄워줌
+	public List view(Study study);
+
+	public Study getStudy(int study_no);
+
+	public List selectCate(int cate_no);
+	//---------------------------------------------------------
   
-  	// 희경 start --------------------------
+  // 희경 start --------------------------
 	
 	//요청파라미터 처리
 	public Study getParam(HttpServletRequest req, HttpServletResponse resp);

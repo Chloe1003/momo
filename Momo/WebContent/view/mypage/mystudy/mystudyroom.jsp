@@ -17,18 +17,18 @@
 
 				<div class="jumbotron"
 					style="padding: 5px; background-color: #eee0; border-bottom: 1px solid #f67280; border-radius: 0;">
-					<h2>신청한 스터디</h2>
-					<p style="font-size: 16px">팀원으로 참여 신청한 스터디 목록입니다</p>
+					<h2>나의 스터디룸</h2>
+					<p style="font-size: 16px">현재 진행중인 스터디 목록입니다</p>
 				</div>
 
-				<ul class="nav nav-tabs" role="tablist" style="margin-bottom: 30px;">
+				<!-- <ul class="nav nav-tabs" role="tablist" style="margin-bottom: 30px;">
 					<li role="presentation"><a
-						href="/mypage/mystudy/imade" style="color: #555;">내가
+						href="/mypage/mystudy/mystudyroom" style="color: #555;">내가
 							만든 스터디</a></li>
 					<li role="presentation" class="active"><a
 						href="/mypage/mystudy/apply" style="color: #F67280;">신청한
 							스터디</a></li>
-				</ul>
+				</ul> -->
 
 				<div class="row" style="margin: 0px;">
 					<c:if test="${isApp eq false}">
@@ -38,9 +38,8 @@
 							<!-- 신청한 스터디 띄워주기 -->
 							<div class="thumbnail col-sm-12">
 								<div class="col-sm-3" style="width: 200px; height: 200px;">
-									<%-- <img src="/cos/upload/${list.file_storedname }" --%>
-									<img src="/img/1.jpg"
-										alt="study image" width="100%" height="100%" style=margin-top:40px;" /><br>
+									<img src="/cos/upload/${list.file_storedname }"
+										alt="study image" width="200" height="200" /><br>
 								</div>
 								<div class="caption col-sm-9">
 									<span class="label label-default"
@@ -54,7 +53,7 @@
 									<p>스터디 횟수 : ${teamState.study_freq }</p>
 									<Strong style="color: red;">상태 :
 										${teamState.ss_statename }</Strong>
-									<button class="btn btn-danger btn_sm" id="cancelApply" onclick="deleteApply(${teamState.study_no})"
+									<button class="btn btn-danger btn_sm" id="cancelApply"
 										style="float: right;">신청취소</button>
 								</div>
 							</div>
@@ -89,10 +88,5 @@
 
 </div>
 
-<script>
-function deleteApply(study_no){
-	location.href="/mypage/mystudy/delete?study_no="+study_no;
-	alert("삭제되었습니다");
-}
-</script>
+
 

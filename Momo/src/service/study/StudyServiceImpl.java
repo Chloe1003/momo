@@ -1,24 +1,53 @@
+
 package service.study;
+
+import java.util.List;
+
+import dao.study.StudyDao;
+import dao.study.StudyDaoImpl;
+import dto.Study;
+import dto.StudyCategory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
+
 import java.sql.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.study.StudyDao;
-import dao.study.StudyDaoImpl;
 import dto.FileUpload;
-import dto.Study;
+
 
 public class StudyServiceImpl implements StudyService {
-
-	private StudyDao studyDao = new StudyDaoImpl();
 	
-	// 희경 start --------------------------
+	StudyDao stdDao = new StudyDaoImpl();
+
+	// 대분류 정보 가져오기
+	@Override
+	public List<StudyCategory> getCategory() {
+		 return stdDao.getCategory();
+	}
+	
+	// 나의 맞춤 스터디 가져오기
+	@Override
+	public List<Study> getMyStudy(int u_no) {
+		return stdDao.getMyStudy(u_no);
+	}
+
+	// 모집마감 임박 스터디 가져오기
+	@Override
+	public List<Study> getHurryStudy() {
+		return stdDao.getHurryStudy();
+	}
+
+	@Override
+	public List<Study> getCateStudyList(int category_code) {
+		return stdDao.getCateStudyList(category_code);
+	}
+  
+  	// 희경 start --------------------------
 		
 	@Override
 	public Study getParam(HttpServletRequest req, HttpServletResponse resp) {
@@ -62,7 +91,7 @@ public class StudyServiceImpl implements StudyService {
 
 	@Override
 	public Study studyopen(Study study) {
-		studyDao.studyopen(study);
+		stdDao.studyopen(study);
 		
 		return study;
 
@@ -70,14 +99,15 @@ public class StudyServiceImpl implements StudyService {
 
 	@Override
 	public void updateFile(FileUpload fileupload) {
-		studyDao.updateFile(fileupload);
+		stdDao.updateFile(fileupload);
 		
 	}
 
 	@Override
 	public int getStudy_no() {
-		return studyDao.getStudy_no();
+		return stdDao.getStudy_no();
 	}
 
 	//희경 end--------------------------
+  
 }

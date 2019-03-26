@@ -21,6 +21,7 @@ public interface TeamDao {
 	
 	//스터디 정보 조회
 	public Study selectStudy(int study_no);
+
 	
 	// yn end -----------------------------------
 	

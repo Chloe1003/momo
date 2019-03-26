@@ -20,6 +20,8 @@ public class TeamServiceImpl implements TeamService {
 	public Study getStudy(int study_no) {
 		return teamDao.selectStudy(study_no);
 	}
+
+
 	
 	// yn end -----------------------------------
 }

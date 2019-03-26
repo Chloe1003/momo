@@ -33,5 +33,17 @@ public interface UsersService {
 	public void updateUsers(int u_no, Users user, String[] favoritcate);
 
 	// yn end -------------------------------------------------
+	public boolean dupId(String userId);
+
+	public List<StudyCategory> cateList();
+
+	//회원가입 요청파라미터 얻기
+	public Users getMemberParam(HttpServletRequest request);
+	
+	//회원가입 선호카테고리 얻기
+	public String[] getUserFavoriteCateParam(HttpServletRequest request);
+	
+	//회원가입 처리
+	public void joinMem(Users mem, String[] favoriteList);
 	
 }

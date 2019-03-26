@@ -50,8 +50,8 @@ public class MyStudyImpl implements MyStudy {
 				sts.setU_name(rs.getString("u_name"));
 				sts.setStudy_name(rs.getString("study_name"));
 				sts.setSs_yesno(rs.getString("ss_yesno"));
-				sts.setSs_applydate(rs.getDate("ss_applydate"));
-				sts.setSs_decisiondate(rs.getDate("ss_decisiondate"));
+				sts.setSs_applydate(rs.getString("ss_applydate"));
+				sts.setSs_decisiondate(rs.getString("ss_decisiondate"));
 				sts.setStudy_region(rs.getString("study_region"));
 				sts.setStudy_details(rs.getString("study_details"));
 				sts.setStudy_freq(rs.getString("study_freq"));

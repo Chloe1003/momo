@@ -254,6 +254,7 @@ public class MessageDaoImpl implements MessageDao {
 			ps.setInt(2, msg.getSender_no());
 			ps.setInt(3, msg.getReceiver_no());
 			
+			System.out.println(msg.getSender_no());
 			
 			ps.executeUpdate();
 			

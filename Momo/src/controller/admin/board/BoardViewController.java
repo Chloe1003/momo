@@ -12,7 +12,7 @@ import dto.Board;
 import service.admin.board.BoardService;
 import service.admin.board.BoardServiceImpl;
 
-@WebServlet("/board/view")
+@WebServlet("/admin/board/view")
 public class BoardViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -21,16 +21,16 @@ public class BoardViewController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		//¿äÃ»ÆÄ¶ó¹ÌÅÍ -> MODEL
+		//ï¿½ï¿½Ã»ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ -> MODEL
 		Board board = boardService.getParam(req, resp);
 		
-		//°Ô½Ã±Û Á¶È¸¼öÇà
+		//ï¿½Ô½Ã±ï¿½ ï¿½ï¿½È¸ï¿½ï¿½ï¿½ï¿½
 		Board boardview = boardService.view(board);
 		
-		//MODEL Àü´Þ
+		//MODEL ï¿½ï¿½ï¿½ï¿½
 		req.setAttribute("boardview", boardview);
 		
-		//VIEWÁöÁ¤
+		//VIEWï¿½ï¿½ï¿½ï¿½
 		req.getRequestDispatcher("/view/admin/board/view.jsp")
 			.forward(req, resp);
 		

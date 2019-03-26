@@ -35,7 +35,7 @@ public class MessageSendController extends HttpServlet {
 		int sender_no = Integer.parseInt(request.getParameter("sender_no"));
 		int receiver_no = Integer.parseInt(request.getParameter("receiver_no"));
 		String m_comment = request.getParameter("m_comment");
-
+		System.out.println(sender_no);
 //		System.out.println("s"+ sender_no);
 //		System.out.println("r"+ receiver_no);
 //		System.out.println(m_comment);

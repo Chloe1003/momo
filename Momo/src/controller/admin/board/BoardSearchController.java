@@ -17,7 +17,7 @@ import service.admin.noticeboard.NoticeBoardService;
 import service.admin.noticeboard.NoticeBoardServiceImpl;
 import util.Paging;
 
-@WebServlet("/board/search")
+@WebServlet("/admin/board/search")
 public class BoardSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -33,17 +33,17 @@ public class BoardSearchController extends HttpServlet {
 		String type = req.getParameter("type");
 		String word = req.getParameter("word");
 		
-		System.out.println(type+" ÀÌ¸§");
+		System.out.println(type+" ï¿½Ì¸ï¿½");
 		System.out.println(word+" word");
 		
 
-		// °Ô½Ã±Û¸ñ·Ï MODEL·Î Ãß°¡
+		// ï¿½Ô½Ã±Û¸ï¿½ï¿½ MODELï¿½ï¿½ ï¿½ß°ï¿½
 		List<Board> boardlist = boardService.getSearch(type, word);
 		
 		req.setAttribute("boardlist", boardlist);
 
 
-		//VIEWÁöÁ¤
+		//VIEWï¿½ï¿½ï¿½ï¿½
 		req.getRequestDispatcher("/view/admin/board/list.jsp")
 			.forward(req, resp);
 		

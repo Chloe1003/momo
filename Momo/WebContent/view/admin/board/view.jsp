@@ -9,13 +9,13 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#btnList").click(function() {
-		$(location).attr("href", "/board/list");
+		$(location).attr("href", "/admin/board/list");
 	});
 	$("#btnUpdate").click(function() {
 		$(location).attr("href", "/board/update?b_no=${boardview.b_no }");
 	});
 	$("#btnDelete").click(function() {
-		$(location).attr("href", "/board/delete?b_no=${boardview.b_no }");
+		$(location).attr("href", "/admin/board/delete?b_no=${boardview.b_no }");
 	});
 });
 </script>

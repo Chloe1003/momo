@@ -142,7 +142,7 @@ td {
 		<br>
 
 		<div class='text-center' style="clear: both;">
-			<FORM name='search' method='post' action='/board/search'>
+			<FORM name='search' method='post' action='/admin/board/search'>
 
 				<SELECT name='type'>
 					<!-- 검색 컬럼 -->

@@ -28,11 +28,10 @@
 							<p>인원: ${teammate.size() }명</p>
 							<p>기간: ~ ${study.study_period }</p>
 							<p>팀장: ${study.u_name }</p>
-							<p>팀원 : <c:forEach var=i begin=0 end=${teammate.size()-1 } >${teammate.get(i).u_name } </c:forEach></p>
+<%-- 							<p>팀원 : <c:forEach var=i begin=0 end=${teammate.size()-1 } >${teammate.get(i).u_name } </c:forEach></p> --%>
 						</div>
 					</div>
-          
-          
+        
           <div class="thumbnail col-sm-12" style="margin-top: 20px; box-shadow: none;padding: 15px;">
           <p><strong>다음 스터디 일정</strong></p>
           <div id="map" class="col-sm-4" style="width:350px;height:250px;"></div>
@@ -40,7 +39,7 @@
           	<div id="study_date">날짜: ${schedule.s_date }</div>
           	<div id="study_time">시간: ${schedule.s_date }</div>
           	<div id="study_location">장소: ${schedule.s_location }</div>
-          	<div id="study_attend">참석자: <c:forEach var=i begin=0 end=${attend.size()-1 }>${attend.get(i).u_name } </c:forEach></div>
+<%--           	<div id="study_attend">참석자: <c:forEach var=i begin=0 end=${attend.size()-1 }>${attend.get(i).u_name } </c:forEach></div> --%>
           </div>
           </div>
    			
@@ -86,9 +85,16 @@
 				marker.setMap(map);
 				
 				
+				/* 메시지 보내기 */
+// 				function sendMsg(receiver_no)
+// 			     $("#sendMsg").click(function(){
+// 			    	 console.log(u_no);
+// // 			         window.open("/mypage/message/send?sender_no="+u_no+"&receiver_no="+receiver_no+"&type=send", "window팝업", "width=400, height=350, menubar=no, status=no, toolbar=no");
+// 			      });
 				
-				
-				
+				function dDayCalc(){
+					var 
+				}
 			</script>
    			
 

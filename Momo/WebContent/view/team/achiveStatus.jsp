@@ -116,73 +116,87 @@
 		</script>
 		
 		
-	<script type="text/javascript">
-		$(document).ready(function() {			
-			$("#btnSearch").click(function() {
-				$("form").submit();
-			});
-
-			var size = ${achiveListSize};
-			var list = '';
-			if(size!=0) {
-				console.log(${subANoList});
-			}
-			
-			$("input[name=sub_code]").click(function() {
-// 				console.log($(this).is(":checked"));
-// 				console.log($(this).attr("value"));
-
-				$.ajax({
-					url: ""
-					, type: "get"
-					, dataType: "json"
-					, data: {
-						"checked":$(this).is(":checked")
-						, "suba_no":$(this).attr("value")
-					}
-					 , success: function() {
-						var apl = ${apl};
-						if( apl != null ) {
-						var l = apl.split(",");
-					    for( var i=0; i<l.length; i++ ) {
-					      $("input[type='checkbox'][value='"+l[i]+"']".prop("checked", true));
-					     }
-					   }
-					 }
-					, complete: function() {
-						location.reload();
-					}
+		<script type="text/javascript">
+			$(document).ready(function() {			
+				$("#btnSearch").click(function() {
+					$("form").submit();
 				});
-			});
-			
-		});
-	</script>
 	
-	<script type="text/javascript">
-		$(document).ready(function() {		
-			$("#btnSearch").click(function() {
-				console.log($(this).is)
+				var size = ${achiveListSize};
+				var list = '';
+				if(size!=0) {
+					console.log(${subANoList});
+				}
 				
-				$.ajax ({
-					url: "/team/achive/chart"
-					, type : "post"
-					, dataType : "json"
-					, data : {
-						
+				$("input[name=sub_code]").click(function() {
+	// 				console.log($(this).is(":checked"));
+	// 				console.log($(this).attr("value"));
+	
+					$.ajax({
+						url: ""
+						, type: "get"
+						, dataType: "json"
+						, data: {
+							"checked":$(this).is(":checked")
+							, "suba_no":$(this).attr("value")
 						}
-					, success: function(data) {
-						
+						 ,/*  success: function() {
+							var apl = ${apl};
+							if( apl != null ) {
+							var l = apl.split(",");
+						    for( var i=0; i<l.length; i++ ) {
+						      $("input[type='checkbox'][value='"+l[i]+"']".prop("checked", true));
+						     }
+						   }
+						 }
+						,  */
+						success : function() {
+							$("input[type='checkbox']".prop("checked", true));
 						}
-					, error: function(e) {
-						alert(e.responseText);
-					}
-
+						/* , complete : function() {
+							location.reload();
+						} */
+					});
 				});
-							
-			})
-		});
-	</script>
-		
+				
+			});
+		</script>
+	
+			<script type="text/javascript">
+			$(document).ready(function() {		
+				$("#btnSearch").click(function() {
+					var ctx = document.getElementById('myChart');
+					var myChart = new Chart(ctx, {
+					   
+						type: 'doughnut',
+						
+					    data: {
+					       	labels: ['1번과제', '2번과제', '3번과제'],
+					        datasets: [{
+					            label: '# of Votes',
+					            data: [33, 33, 33],
+					            backgroundColor: [
+					                'rgba(255, 99, 132, 0.2)',
+					                'rgba(54, 162, 235, 0.2)',
+					                'rgba(255, 206, 86, 0.2)'
+					            ],
+					            borderColor: [
+					                'rgba(255, 99, 132, 1)',
+					                'rgba(54, 162, 235, 1)',
+					                'rgba(255, 206, 86, 1)'
+					            ],
+					            borderWidth: 1
+					        }]
+					    },
+					    options: {
+					      responsive : false
+					    }
+					});				
+				
+				})
+			});
+		</script>
+			
 		
 		
 <!-- 		<form method="post" > -->

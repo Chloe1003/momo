@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.mypage.message.MessageDao;
 import dao.mypage.message.MessageDaoImpl;
 import dto.Message;
+import dto.Users;
 import util.Paging;
 
 public class MessageServiceImpl implements MessageService {
@@ -71,7 +72,11 @@ public class MessageServiceImpl implements MessageService {
 //		msgDao.deleteMesssage(m_no);
 //	}
 
-	
+	@Override
+	public Users getUserName(int u_no) {
+
+		return msgDao.selectUserName(u_no);
+	}
 
 	
 	

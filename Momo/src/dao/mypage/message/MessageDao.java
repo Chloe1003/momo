@@ -3,6 +3,7 @@ package dao.mypage.message;
 import java.util.List;
 
 import dto.Message;
+import dto.Users;
 import util.Paging;
 
 public interface MessageDao {
@@ -25,6 +26,7 @@ public interface MessageDao {
 		// 리스트에서 쪽지 선택
 		public Message selectMsgByMno(int m_no);
 		
+		public Users selectUserName(int u_no);
 		
 	
 	

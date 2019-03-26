@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.Message;
+import dto.Users;
 import util.Paging;
 
 public interface MessageService {
@@ -36,5 +37,6 @@ public interface MessageService {
 		
 		public String getSide(HttpServletRequest req, HttpServletResponse resp);
 		
+		public Users getUserName(int u_no);
 	
 }

@@ -1,6 +1,7 @@
 package controller.mypage.message;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dto.Message;
+import dto.Users;
 import service.mypage.message.MessageService;
 import service.mypage.message.MessageServiceImpl;
 
@@ -20,12 +22,33 @@ public class MessageSendController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int m_no = Integer.parseInt(request.getParameter("m_no"));
-		Message msg = mServ.getMsgByMno(m_no);
+		Message msg = new Message();
 		
-		request.setAttribute("msg", msg);
+		if(request.getParameter("type")=="reply") {
+			// ´äÀåÇÒ ¶§
+			int m_no = Integer.parseInt(request.getParameter("m_no"));
+			msg = mServ.getMsgByMno(m_no);
+			
+
+		} else if(request.getParameter("type")=="send") {
+			// Ã³À½ º¸³¾ ¶§
+			HttpSession session = request.getSession(true);
+			int sender_no = (int) session.getAttribute("u_no");
+			int receiver_no = Integer.parseInt(request.getParameter("receiver_no"));
+			Users sender = mServ.getUserName(sender_no);
+			Users receiver = mServ.getUserName(receiver_no);
+			
+			msg.setSender_no(sender_no);
+			msg.setSender_name(sender.getU_name());
+			msg.setReceiver_no(receiver_no);
+			msg.setReceiver_name(receiver.getU_name());
+			
+		}
 		
-		request.getRequestDispatcher("/view/mypage/message/replyMsg.jsp").forward(request, response);
+		request.setAttribute("msg", msg);	
+		
+		request.getRequestDispatcher("/view/mypage/message/sendMsg.jsp").forward(request, response);
+
 	}
 
 	
@@ -35,7 +58,7 @@ public class MessageSendController extends HttpServlet {
 		int sender_no = Integer.parseInt(request.getParameter("sender_no"));
 		int receiver_no = Integer.parseInt(request.getParameter("receiver_no"));
 		String m_comment = request.getParameter("m_comment");
-		System.out.println(sender_no);
+
 //		System.out.println("s"+ sender_no);
 //		System.out.println("r"+ receiver_no);
 //		System.out.println(m_comment);

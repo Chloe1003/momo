@@ -59,7 +59,7 @@
               <li class="dropdown">
               	 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">IT프로그래밍<span class="caret"></span></a>
               		<ul class="dropdown-menu" role="menu">
-                	<li><a href="#">Java·JSP</a></li>
+                	<li><a href="/study/search?cate=1">Java·JSP</a></li>
 	                <li><a href="#">C언어</a></li>
 	                <li><a href="#">파이썬</a></li>
 	                <li><a href="#">APP개발</a></li>

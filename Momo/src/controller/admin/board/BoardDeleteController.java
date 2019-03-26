@@ -13,7 +13,7 @@ import dto.BoardComment;
 import service.admin.board.BoardService;
 import service.admin.board.BoardServiceImpl;
 
-@WebServlet("/board/delete")
+@WebServlet("/admin/board/delete")
 public class BoardDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -22,18 +22,18 @@ public class BoardDeleteController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		//¿äÃ»ÆÄ¶ó¹ÌÅÍ -> MODEL
+		//ï¿½ï¿½Ã»ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ -> MODEL
 		Board board = boardService.getParam(req, resp);
 		
-		//°Ô½Ã±Û»èÁ¦ ¼öÇà
+		//ï¿½Ô½Ã±Û»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		boardService.delete(board.getB_no());
 		
 	
 		
-		//MODEL Àü´Þ
+		//MODEL ï¿½ï¿½ï¿½ï¿½
 //		req.setAttribute("boarddel", boarddel);
 		
-		//VIEWÁöÁ¤
+		//VIEWï¿½ï¿½ï¿½ï¿½
 		req.getRequestDispatcher("/view/admin/board/delete.jsp")
 			.forward(req, resp);
 		

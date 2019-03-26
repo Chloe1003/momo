@@ -33,17 +33,26 @@ public class UsersLoginController extends HttpServlet {
 		Users user = uServ.loginGetParam(request, response);
 		boolean login = uServ.login(user);
 		
-		if(login==true) {
+		if(login==true && user.getU_id().equals("admin") ) {
 			Users u = uServ.getUserByUid(user);
 
 			session.setAttribute("u_no", u.getU_no());
 			session.setAttribute("u_id", u.getU_id());
 			session.setAttribute("u_name", u.getU_name());
 
+			session.setAttribute("login", login);
+			response.sendRedirect("/usersmanage/list");
+			
+		}else if(login==true) {
+			Users u = uServ.getUserByUid(user);
+
+			session.setAttribute("u_no", u.getU_no());
+			session.setAttribute("u_id", u.getU_id());
+			session.setAttribute("u_name", u.getU_name());
+
+			session.setAttribute("login", login);
+			response.sendRedirect("/main");
 		}
-		
-		session.setAttribute("login", login);
-		response.sendRedirect("/main");
 	}
 
 }

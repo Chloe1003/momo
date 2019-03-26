@@ -14,7 +14,7 @@ import service.admin.board.BoardService;
 import service.admin.board.BoardServiceImpl;
 import util.Paging;
 
-@WebServlet("/board/list")
+@WebServlet("/admin/board/list")
 public class BoardListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -23,24 +23,24 @@ public class BoardListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		//ÇöÀç ÆäÀÌÁö ¹øÈ£ ¾ò±â
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ ï¿½ï¿½ï¿½
 		int curPage = boardService.getCurPage(req);
 		
-		//ÃÑ °Ô½Ã±Û ¼ö ¾ò±â
+		//ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½
 		int totalCount = boardService.getTotalCount();
 		
-		//ÆäÀÌÁö °´Ã¼ »ý¼º
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 		Paging paging = new Paging(totalCount, curPage);
 //		System.out.println(paging);
 		
-		//°Ô½Ã±Û¸ñ·Ï MODEL·Î Ãß°¡
+		//ï¿½Ô½Ã±Û¸ï¿½ï¿½ MODELï¿½ï¿½ ï¿½ß°ï¿½
 		List<Board> boardlist = boardService.getPagingList(paging);
 		req.setAttribute("boardlist", boardlist);
 		
-		//ÆäÀÌÂ¡°´Ã¼ MODEL·Î Ãß°¡
+		//ï¿½ï¿½ï¿½ï¿½Â¡ï¿½ï¿½Ã¼ MODELï¿½ï¿½ ï¿½ß°ï¿½
 		req.setAttribute("paging", paging);
 		
-		//VIEWÁöÁ¤
+		//VIEWï¿½ï¿½ï¿½ï¿½
 		req.getRequestDispatcher("/view/admin/board/list.jsp")
 			.forward(req, resp);
 		

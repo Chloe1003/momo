@@ -29,4 +29,15 @@ public interface UsersDao {
 	public void deleteFavoriteCate(int u_no);
 	
 	// yn end -------------------------------------------------
+	
+	public boolean dupId(String userId);
+	
+	public List cateList();
+	
+	public int getUsersNo();
+	
+	public void insertUsers(Users mem);
+	
+	public void insertUserFavoriteCate(Users mem, String favorite);
+	
 }

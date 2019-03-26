@@ -21,6 +21,7 @@ public interface TeamService {
 	// 스터디 정보 가져오기
 	public Study getStudy(int study_no);
 	
+
 	// yn end -----------------------------------
 	
 }

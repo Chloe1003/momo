@@ -363,5 +363,156 @@ private Connection conn = DBConn.getConnection();
 	
 	// yn end -----------------------------------------------
 	
+	@Override
+	public boolean dupId(String userId) {
+		boolean dupFlat = false;
+		
+		String sql = "";
+		sql += "SELECT COUNT(*) FROM USERS";
+		sql += " WHERE U_ID = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, userId);
+			rs = ps.executeQuery();
+			
+			rs.next();
+			int result = rs.getInt(1);
+			
+			if(result == 0)
+				dupFlat = true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return dupFlat;
+	}
 
+	@Override
+	public List<StudyCategory> cateList() {
+		String sql = "";
+		sql += "SELECT * FROM STUDYCATEGORY";
+		
+		List<StudyCategory> cateList = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				StudyCategory cate = new StudyCategory();
+				
+				cate.setSt_catecode(rs.getInt("st_catecode"));
+				cate.setSt_catename(rs.getString("st_catename"));
+				
+				cateList.add(cate);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cateList;
+	}
+
+	@Override
+	public int getUsersNo() {
+		String sql = "";
+		sql += "SELECT users_seq.nextval FROM dual";
+		int result = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			rs.next();
+			result = rs.getInt(1);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public void insertUsers(Users mem) {
+		// 회원 db insert
+		String sql = "";
+		sql += "INSERT INTO USERS ";
+		sql += " (U_NO, U_ID, U_PW, U_NAME, U_PHONE, U_EMAIL, U_BIRTH, U_REGDATE)";
+		sql += " VALUES (?, ?, ?, ?, ?, ?, ?, TO_DATE(SYSDATE, 'YY/MM/DD'))";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, mem.getU_no());
+			ps.setString(2, mem.getU_id());
+			ps.setString(3, mem.getU_pw());
+			ps.setString(4, mem.getU_name());
+			ps.setString(5, mem.getU_phone());
+			ps.setString(6, mem.getU_email());
+			ps.setString(7, mem.getU_birth());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void insertUserFavoriteCate(Users mem, String favorite) {
+		String sql = "";
+		sql += "INSERT INTO USERFAVORITCATE ";
+		sql += " (U_NO, ST_CODE)";
+		sql += " VALUES (?, ?)";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, mem.getU_no());
+			ps.setString(2, favorite);
+			
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

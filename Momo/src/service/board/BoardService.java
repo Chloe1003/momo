@@ -50,7 +50,7 @@ public interface BoardService {
 	public int getRecommendCnt(String b_no);
 
 	// 게시글 신고
-	public void boardReport(String b_no);
+	public void boardReport(String b_no, int u_no);
 
 	// 이미 추천한 게시글인지 여부 체크
 	public boolean isRcmd(Board board, int u_no);

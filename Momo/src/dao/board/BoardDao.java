@@ -44,7 +44,7 @@ public interface BoardDao {
 
 	public int getRecommendCnt(String b_no);
 
-	public void boardReport(String b_no);
+	public void boardReport(String b_no, int u_no);
 
 	public boolean isRcmd(Board board, int u_no);
 

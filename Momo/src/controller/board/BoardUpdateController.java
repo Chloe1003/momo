@@ -1,17 +1,20 @@
 package controller.board;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.board.BoardDao;
 import dao.board.BoardDaoImpl;
 import dto.Board;
 import dto.FileUpload;
+import dto.Study;
 import service.board.BoardService;
 import service.board.BoardServiceImpl;
 
@@ -34,7 +37,11 @@ public class BoardUpdateController extends HttpServlet {
 		// 첨부파일 명 가져오기 
 		String fileName = boardservice.getFile(board);
 		request.setAttribute("fileName", fileName);
-		
+
+		HttpSession session = request.getSession(true);
+		String user = (String) session.getAttribute("u_name");
+		request.setAttribute("userName", user);
+
 		// 수정할 게시글 가져와서 객체에 담기 
 		board = boardservice.getBoard(bno);
 		
@@ -50,25 +57,31 @@ public class BoardUpdateController extends HttpServlet {
 		Board board = new Board();
 		
 		String b_head = request.getParameter("head");
+		
 		String b_title = request.getParameter("title");
 		String b_content = request.getParameter("content");
 		String bno = request.getParameter("b_no");
-		String fileno = request.getParameter("fileno");
-		int file_no = Integer.parseInt(fileno);
 		int b_no = Integer.parseInt(bno);
+		
+		
+		String fileno = request.getParameter("file_no");
+		int file_no = Integer.parseInt(fileno);
+		
+		if( file_no > 0 )  {
+			
+			board.setFile_no(file_no);
+			 
+			FileUpload upfile = new FileUpload();
+			upfile.setFile_no(file_no);
+		} 
 		
 		board.setB_head(b_head);
 		board.setB_title(b_title);
 		board.setB_content(b_content);
 		board.setB_no(b_no);
-		board.setFile_no(file_no);
 		
-
-		FileUpload upfile = new FileUpload();
-		upfile.setFile_no(file_no);
 		
 		boardservice.boardUpdate(board);
-		//boardDao.updateFile(upfile);
 		response.sendRedirect("/board/list");
 	}
 

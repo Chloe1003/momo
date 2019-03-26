@@ -89,12 +89,12 @@ function sendData(no, name) {
 
 <div>
 <form action="/board/update" method="post">
-<input type="hidden" id="fileno" name="fileno" />
+<input type="hidden" id="file_no" name="file_no" value="${board.file_no }"/>
+<input type="hidden" id="b_no" name="b_no" value="${board.b_no}"/>
 <table class="table table-bordered">
 <tr>
 <td class="info">말머리</td>
 <td colspan="2">
-
 <div class="col-sm-4 control-div">
 <select class="form-control" name="head" id="head">
 	<option value="default">말머리를 선택해주세요</option>
@@ -106,13 +106,9 @@ function sendData(no, name) {
 </tr>
 
 
-<!-- ★  작성자 로그인 후 확인!!!★ -->
 <tr>
 <td class="info">작성자</td>
-<td colspan="2">${userName }
-<input type="hidden" id="b_no" name="b_no" value="${board.b_no }" /></td>
-
-<!-- ★  작성자 로그인 후 확인!!!★ -->
+<td colspan="2">${userName }</td>
 
 </tr>
 <tr>

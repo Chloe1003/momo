@@ -19,21 +19,15 @@ private ResultSet rs = null;
 	
 	@Override
 	public List<Board> selectAll() {
-		
-/*
-		!! 신고 삭제 처리가 되지 않은 게시글만 목록에 노출하기 !!
-		SELECT BOARD.*, USERS.U_NAME FROM BOARD B
-		INNER JOIN USERS U
-		ON BOARD.U_NO = USERS.U_NO
-		INNER JOIN REPORT R
-		ON R.UNO = B.UNO
-		WHERE R.RE_STATE <> "삭제완료";
-*/
+
 
 		String sql = "";
 		sql += "SELECT BOARD.*, USERS.U_NAME FROM BOARD";
 		sql += " INNER JOIN USERS";
 		sql += " ON BOARD.U_NO = USERS.U_NO";
+		sql += " INNER JOIN REPORT R";
+		sql += " ON R.UNO = B.UNO";
+		sql += " WHERE R.RE_YESNO = N";
 		
 		List<Board> boardList = new ArrayList<>();
 		
@@ -305,15 +299,16 @@ private ResultSet rs = null;
 		if(board.getFile_no()>0) {
 			String sql = "";
 			sql += "INSERT INTO BOARD (B_NO, U_NO, B_HEAD, B_TITLE, B_CONTENT, FILE_NO, B_DATE, B_UPCOUNT, B_COUNT)";
-			sql += " VALUES(?, 100, ?, ?, ?, ?, SYSDATE, 0, 0)";
+			sql += " VALUES(?, ?, ?, ?, ?, ?, SYSDATE, 0, 0)";
 			
 			try {
 				ps = conn.prepareStatement(sql);
 				ps.setInt(1, b_no);
-				ps.setString(2, board.getB_head());
-				ps.setString(3, board.getB_title());
-				ps.setString(4, board.getB_content());
-				ps.setInt(5, board.getFile_no());
+				ps.setInt(2, board.getU_no());
+				ps.setString(3, board.getB_head());
+				ps.setString(4, board.getB_title());
+				ps.setString(5, board.getB_content());
+				ps.setInt(6, board.getFile_no());
 				ps.executeUpdate();
 				
 			} catch (SQLException e) {
@@ -331,14 +326,15 @@ private ResultSet rs = null;
 		} else {
 			String sql = "";
 			sql += "INSERT INTO BOARD (B_NO, U_NO, B_HEAD, B_TITLE, B_CONTENT, FILE_NO, B_DATE, B_UPCOUNT, B_COUNT)";
-			sql += " VALUES(?, 100, ?, ?, ?, NULL, SYSDATE, 0, 0)";
+			sql += " VALUES(?, ?, ?, ?, ?, NULL, SYSDATE, 0, 0)";
 			
 			try {
 				ps = conn.prepareStatement(sql);
 				ps.setInt(1, b_no);
-				ps.setString(2, board.getB_head());
-				ps.setString(3, board.getB_title());
-				ps.setString(4, board.getB_content());
+				ps.setInt(2, board.getU_no());
+				ps.setString(3, board.getB_head());
+				ps.setString(4, board.getB_title());
+				ps.setString(5, board.getB_content());
 				ps.executeUpdate();
 				
 			} catch (SQLException e) {
@@ -571,14 +567,15 @@ private ResultSet rs = null;
 	}
 
 	@Override
-	public void boardReport(String b_no) {
+	public void boardReport(String b_no, int u_no) {
 		String sql = "";
 		sql += "INSERT INTO REPORT (RP_NO, B_NO, U_NO, RP_DATE, RP_STATUS, RE_YESNO, RE_DATE)";
-		sql += " VALUES (REPORT_SEQ.NEXTVAL, ?, 30, SYSDATE, '처리중', 'N', null)";
+		sql += " VALUES (REPORT_SEQ.NEXTVAL, ?, ?, SYSDATE, '처리중', 'N', null)";
 		
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, b_no);
+			ps.setInt(2, u_no);
 			ps.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -659,30 +656,59 @@ private ResultSet rs = null;
 
 	@Override
 	public void boardUpdate(Board board) {
-		String sql = "";
-		sql += "UPDATE BOARD SET B_HEAD=?, B_TITLE=?, B_CONTENT=?, FILE_NO=?, B_DATE=SYSDATE WHERE B_NO = ?";
-		
-		try {
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, board.getB_head());
-			ps.setString(2, board.getB_title());
-			ps.setString(3, board.getB_content());
-			ps.setInt(4, board.getFile_no());
-			ps.setInt(5, board.getB_no());
-			ps.executeUpdate();
+		if(board.getFile_no() > 0 ) {
+			String sql = "";
+			sql += "UPDATE BOARD SET B_HEAD=?, B_TITLE=?, B_CONTENT=?, FILE_NO=?, B_DATE=SYSDATE";
+			sql += " WHERE B_NO = ?";
 			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
 			try {
-				if(rs!=null) rs.close();
-				if(ps!=null) ps.close();
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, board.getB_head());
+				ps.setString(2, board.getB_title());
+				ps.setString(3, board.getB_content());
+				ps.setInt(4, board.getFile_no());
+				ps.setInt(5, board.getB_no());
+				ps.executeUpdate();
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} finally {
+				try {
+					if(rs!=null) rs.close();
+					if(ps!=null) ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} else {
+			String sql = "";
+			sql += "UPDATE BOARD SET B_HEAD=?, B_TITLE=?, B_CONTENT=?, B_DATE=SYSDATE";
+			sql += " WHERE B_NO = ?";
+			
+			try {
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, board.getB_head());
+				ps.setString(2, board.getB_title());
+				ps.setString(3, board.getB_content());
+				ps.setInt(4, board.getB_no());
+				ps.executeUpdate();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				try {
+					if(rs!=null) rs.close();
+					if(ps!=null) ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
+		
 	}
 
 	

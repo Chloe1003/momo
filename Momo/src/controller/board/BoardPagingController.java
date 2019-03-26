@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dto.Board;
 import service.board.BoardService;
@@ -31,7 +32,6 @@ public class BoardPagingController extends HttpServlet {
 		
 		//페이지 객체 생성
 		Paging paging = new Paging(totalCount, curPage);
-//		System.out.println(paging);
 		
 		//게시글목록 MODEL로 추가
 		List<Board> boardList = boardService.getPagingList(paging);
@@ -44,7 +44,6 @@ public class BoardPagingController extends HttpServlet {
 		req.getRequestDispatcher("/view/board/paginglist.jsp")
 			.forward(req, resp);
 	}
-	
 }
 
 

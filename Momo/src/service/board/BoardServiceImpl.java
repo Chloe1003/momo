@@ -121,8 +121,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void boardReport(String b_no) {
-		boardDao.boardReport(b_no);
+	public void boardReport(String b_no, int u_no) {
+		boardDao.boardReport(b_no, u_no);
 	}
 
 	@Override

@@ -99,13 +99,10 @@ function sendData(no, name) {
 </td>
 </tr>
 
-<!-- ★  작성자 로그인 후 확인!!!★ -->
 <tr>
 <td class="info">작성자</td>
-<%-- <td colspan="2"><% session.getAttribute("u_name");%></td> --%>
-<td name="u_name"colspan="2">조민환</td>
+<td colspan="2">${userName }</td>
 
-<!-- ★  작성자 로그인 후 확인!!!★ -->
 
 </tr>
 

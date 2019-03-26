@@ -18,11 +18,8 @@ public class StudyCateController extends HttpServlet {
 	private StudyService studyservice = new StudyServiceImpl();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				
-		
-		
-		
-		
+
+
 		request.getRequestDispatcher("/view/study/cateOption.jsp").forward(request, response);
 		
 	}

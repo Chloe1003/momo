@@ -3,26 +3,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html>
-
-<!-- 부트스트랩 3.3.2 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-2.2.4.min.js">
-	
-</script>
-
-<script type="text/javascript">
-	
-</script>
+<jsp:include page="/view/layout/header.jsp"/>
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		if (!${login}) {
+			alert("로그인 후 이용해주세요");
+			location.href = "/users/login"
+		}
+		
 		$("table").on("click", "tr", function() {
 			//클릭이벤트가 발생한 <tr>의 첫번째 <td>자식의 텍스트
 			var boardno = $(this).children("td").eq(0).text();
@@ -42,10 +31,6 @@ td {
 }
 </style>
 
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 <style>
 * {
 	margin: 0;
@@ -186,4 +171,4 @@ table tbody tr td {
 		</div>
 	</div>
 </body>
-</html>
+<jsp:include page="/view/layout/footer.jsp"/>

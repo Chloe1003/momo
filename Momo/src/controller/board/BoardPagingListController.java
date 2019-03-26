@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dto.Board;
 import service.board.BoardService;
@@ -22,6 +23,10 @@ public class BoardPagingListController extends HttpServlet {
 	BoardService boardlist = new BoardServiceImpl();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		HttpSession session = request.getSession(true);
+		boolean login = (boolean) session.getAttribute("login"); 
+		request.setAttribute("login", login); // login 여부 체크
 		
 		// 현재 페이지 번호 얻기
 		int curPage = boardlist.getCurPage(request);

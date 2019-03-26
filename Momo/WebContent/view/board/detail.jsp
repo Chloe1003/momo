@@ -18,9 +18,10 @@
 
 $(document).ready(function() {
 	
-	// ****************************************************************************
-	// 초기 로딩시 세션의 u_no가져와서 버튼 초기세팅 작업 필요함 :: 테스트를 위해 u_no = 100으로 고정
-	// ****************************************************************************
+	if (!${login}) {
+		alert("로그인 후 이용해주세요");
+		location.href = "/users/login"
+	}
 	
 	var isRcmd = ${Recommend };
 	
@@ -389,9 +390,8 @@ td.noreply {
 		</tbody>
 	</table>
 	
-	
 	<form action="/board/comment" method="post">
-	<input type="hidden" name="u_no" value=100 />
+	<input type="hidden" name="u_no" value=${u_no } />
 	<input type="hidden" name="b_no" value=${boardView.b_no} />
 	<table class="container">
 		<tr style="text-align:center;">

@@ -24,20 +24,30 @@ public class BoardDetailController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		req.setCharacterEncoding("utf-8");
 
 		HttpSession session = req.getSession(true);
-		session.setAttribute("u_no", 100);
-
+		boolean login = false;
+		if(session.getAttribute("login") != null) {
+			login = (boolean) session.getAttribute("login");
+			req.setAttribute("login", login);
+		} else {
+			login = false;
+		}
+		
 		// 요청파라미터 -> MODEL
 		Board board = boardService.getParam(req, resp);
 
-// 		세션 통해 u_no 가져와서 추천한 글인지 체크하여야함!!! 우선 u_no = 100 으로 고정하였음
-//	      String u_no = req.getSession("u_no");
-//	      boolean isRcmd = boardService.isRcmd(u_no);
+		int u_no = -1;
+		if(session.getAttribute("u_no") != null) {
+			u_no = (int)session.getAttribute("u_no");	
+			req.setAttribute("u_no", u_no);	
+		}
+		boolean isRcmd = boardService.isRcmd(board, u_no);
 
-		// 추천게시글인지 체크 (true=추천, false=비추천)bb 
-		boolean isRecommend = boardService.isRcmd(board, 100);
+		// 추천게시글인지 체크 (true=추천, false=비추천)
+		boolean isRecommend = boardService.isRcmd(board, u_no);
 
 		// 작성자 u_no 전달 (본인 게시글인지 여부 확인위함)
 		int write_no = boardService.getUno(board);
@@ -61,7 +71,6 @@ public class BoardDetailController extends HttpServlet {
 		
 		// VIEW지정
 		req.getRequestDispatcher("/view/board/detail.jsp").forward(req, resp);
-
 	}
 }
 

@@ -50,7 +50,7 @@ public class StudyServiceImpl implements StudyService {
 
 	// 조건검색
 	@Override
-	public Study getParam(HttpServletRequest request, HttpServletResponse response) {
+	public Study getConditionedParam(HttpServletRequest request, HttpServletResponse response) {
 
 		// 요청 파라미터 정보를 저장할 객체
 		Study study = new Study();
@@ -135,4 +135,69 @@ public class StudyServiceImpl implements StudyService {
 	      return L1;
 	   
 	   }
+  
+    	// 희경 start --------------------------
+		
+	@Override
+	public Study getParam(HttpServletRequest req, HttpServletResponse resp) {
+		
+		Study study = new Study();
+	
+		String study_name =(String)req.getParameter("study_name");
+		int st_code = Integer.parseInt(req.getParameter("st_code"));
+		//int file_no = Integer.parseInt(req.getParameter("file_no"));
+		String study_region =(String)req.getParameter("study_region");
+		String study_time =(String)req.getParameter("study_time");
+		String study_freq =(String)req.getParameter("study_freq");
+		int study_min = Integer.parseInt(req.getParameter("study_min"));
+		int study_max = Integer.parseInt(req.getParameter("study_max"));
+		String study_gender =(String)req.getParameter("study_gender");
+		String study_opendate =(String)req.getParameter("study_opendate");
+		String study_period = (String)req.getParameter("study_period");
+		String study_detail =(String)req.getParameter("study_detail");
+	
+		HttpSession session = req.getSession(true);
+		int u_no = (int)session.getAttribute("u_no"); 
+				
+		
+		study.setStudy_name(study_name);
+		study.setSt_code(st_code);
+		//study.setFile_no(file_no);
+		study.setStudy_region(study_region);
+		study.setStudy_time(study_time);
+		study.setStudy_freq(study_freq);
+		study.setStudy_min(study_min);
+		study.setStudy_max(study_max);
+		study.setStudy_gender(study_gender);
+		study.setStudy_opendate(study_opendate);
+		study.setStudy_period(study_period);
+		study.setStudy_details(study_detail);
+		study.setU_no(u_no);
+
+
+		return study;
+	}
+
+	@Override
+	public Study studyopen(Study study) {
+		stdDao.studyopen(study);
+		
+		return study;
+
+	}
+
+	@Override
+	public void updateFile(FileUpload fileupload) {
+		stdDao.updateFile(fileupload);
+		
+	}
+
+	@Override
+	public int getStudy_no() {
+		return stdDao.getStudy_no();
+	}
+
+	//희경 end--------------------------
+  
 }
+

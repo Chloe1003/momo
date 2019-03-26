@@ -1,5 +1,6 @@
 package dto;
 
+
 import java.sql.Date;
 
 public class StudyTeamState {
@@ -8,8 +9,8 @@ public class StudyTeamState {
 	private int study_no;// 스터디 번호
 	private int ss_statecode;// 스터디 상태코드
 	private int ts_statecode;// 신청상태코드
-	private Date ss_applydate;// 신청날짜
-	private Date ss_decisiondate;// 결정날짜
+	private String ss_applydate;// 신청날짜
+	private String ss_decisiondate;// 결정날짜
 	private String ss_yesno;// 팀장여부
 
 	// join용
@@ -53,6 +54,7 @@ public class StudyTeamState {
 				+ ts_statename + ", u_name=" + u_name + ", study_name=" + study_name + ", study_region=" + study_region
 				+ ", study_details=" + study_details + ", study_freq=" + study_freq + ", study_opendate="
 				+ study_opendate + "]";
+
 	}
 	public int getU_no() {
 		return u_no;
@@ -78,16 +80,18 @@ public class StudyTeamState {
 	public void setTs_statecode(int ts_statecode) {
 		this.ts_statecode = ts_statecode;
 	}
-	public Date getSs_applydate() {
+
+
+	public String getSs_applydate() {
 		return ss_applydate;
 	}
-	public void setSs_applydate(Date ss_applydate) {
+	public void setSs_applydate(String ss_applydate) {
 		this.ss_applydate = ss_applydate;
 	}
-	public Date getSs_decisiondate() {
+	public String getSs_decisiondate() {
 		return ss_decisiondate;
 	}
-	public void setSs_decisiondate(Date ss_decisiondate) {
+	public void setSs_decisiondate(String ss_decisiondate) {
 		this.ss_decisiondate = ss_decisiondate;
 	}
 	public String getSs_yesno() {
@@ -96,6 +100,7 @@ public class StudyTeamState {
 	public void setSs_yesno(String ss_yesno) {
 		this.ss_yesno = ss_yesno;
 	}
+
 	public String getSs_statename() {
 		return ss_statename;
 	}
@@ -123,3 +128,7 @@ public class StudyTeamState {
 
 	
 }
+
+	
+	
+

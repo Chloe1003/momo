@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+encoding//WebContent/view/admin/faq/list.jsp=UTF-8
+encoding//src/controller/admin/banners/BannersFileUploadController.java=UTF-8
+encoding//src/dao/file/FileDao.java=UTF-8
+encoding//src/dao/users/UsersDaoImpl.java=UTF-8
+encoding//src/service/users/UsersService.java=UTF-8

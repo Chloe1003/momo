@@ -18,11 +18,20 @@ public class Report {
 	private String rp_status;
 	private String re_yesno;
 	private Date re_date;
+	private String u_name; //신고자 이름 
+	private String b_title; // 게시글 제목
 	
-	@Override
-	public String toString() {
-		return "Report [rp_no=" + rp_no + ", b_no=" + b_no + ", u_no=" + u_no + ", rp_date=" + rp_date + ", rp_status="
-				+ rp_status + ", re_yesno=" + re_yesno + ", re_date=" + re_date + "]";
+	public String getU_name() {
+		return u_name;
+	}
+	public void setU_name(String u_name) {
+		this.u_name = u_name;
+	}
+	public String getB_title() {
+		return b_title;
+	}
+	public void setB_title(String b_title) {
+		this.b_title = b_title;
 	}
 	public int getRp_no() {
 		return rp_no;
@@ -65,6 +74,16 @@ public class Report {
 	}
 	public void setRe_date(Date re_date) {
 		this.re_date = re_date;
+	}
+	@Override
+	public String toString() {
+		return "Report [rp_no=" + rp_no + ", b_no=" + b_no + ", u_no=" + u_no + ", rp_date=" + rp_date + ", rp_status="
+				+ rp_status + ", re_yesno=" + re_yesno + ", re_date=" + re_date + ", u_name=" + u_name + ", b_title="
+				+ b_title + ", getU_name()=" + getU_name() + ", getB_title()=" + getB_title() + ", getRp_no()="
+				+ getRp_no() + ", getB_no()=" + getB_no() + ", getU_no()=" + getU_no() + ", getRp_date()="
+				+ getRp_date() + ", getRp_status()=" + getRp_status() + ", getRe_yesno()=" + getRe_yesno()
+				+ ", getRe_date()=" + getRe_date() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
 	
 	

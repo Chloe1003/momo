@@ -25,8 +25,6 @@ $(document).ready(function() {
 
 </style>
 
-
-
 <div class="wrapper">
 	<div class="container">
 
@@ -49,9 +47,9 @@ $(document).ready(function() {
 
 				<ul class="nav nav-tabs" role="tablist" style="margin-bottom: 30px;">
 					<li role="presentation" class="active"><a
-						href="/mypage/mystudy/studyimade" style="color: #F67280;">내가 만든
+						href="/mypage/mystudy/imade" style="color: #F67280;">내가 만든
 							스터디</a></li>
-					<li role="presentation"><a href="/mypage/mystudy/studyiapplied"
+					<li role="presentation"><a href="/mypage/mystudy/apply"
 						style="color: #555;">신청한 스터디</a></li>
 				</ul>
 
@@ -61,11 +59,11 @@ $(document).ready(function() {
 
 					<div class="thumbnail col-sm-12">
 						<div class="col-sm-3" style="width: 200px; height: 200px;">
-							<img src="/cos/upload/${list.file_storedname }" alt="study image" width="200" height="200" /><br>
+							<%-- <img src="/cos/upload/${list.file_storedname }" --%><img src="/img/1.jpg" alt="study image" width="200" height="200" style="padding-right:20px"/><br>
 						</div>
 						<div class="caption col-sm-9">
 							<span class="label label-default"
-								style="float: right; font-size: 95%;"">스터디상태</span>
+								style="float: right; font-size: 95%;">스터디상태</span>
 							<h3>스터디제목</h3>
 							<p>스터디 설명</p>
 							<div id="clickAppliedList" style="text-align: center;cursor:pointer">신청자 리스트 <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>

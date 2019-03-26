@@ -20,5 +20,10 @@ public interface BookmarkService {
 	
 	// ����ں� �Խñ� ����¡ ����Ʈ ���
 	public List getBookmarkPagingList(int u_no, Paging paging);
+	
+	//준환추가(AJAX)
+	public void insertBookmark(Bookmark bookmarks);
+	//준환추가(AJAX)
+	public void deleteBookmark(Bookmark bmark);
 		
 }

@@ -144,6 +144,74 @@ public class BookmarkDaoImpl implements BookmarkDao {
 		return bmList;
 	}
 	
+// jh-------------------------------------------------------
+	//찜하기 db insert(AJAX_준환)
+		@Override
+		public void insertBookmark(Bookmark bookmark) {
+			String sql = "";
+			sql += "INSERT INTO bookmark (u_no, study_no, bm_date, bm_no)";
+			sql += " VALUES(?,?,sysdate,bookmark_seq.nextval)";
 
+			try {
+
+				// db작업
+				ps = conn.prepareStatement(sql);
+				
+				ps.setInt(1, bookmark.getU_no());
+				ps.setInt(2, bookmark.getStudy_no());
+
+				ps.executeUpdate();
+
+				conn.commit();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+
+				try {
+					if (ps != null)
+						ps.close();
+				} catch (SQLException e) {
+				}
+			}
+
+		}
+
+		//bookmark 삭제(AJAX_준환)
+		@Override
+		public void deleteBookmark(Bookmark bmark) {
+			String sql = "";
+		      sql += "DELETE FROM bookmark";
+		      sql += " WHERE u_no = ?";
+		      sql += " AND study_no = ?";
+
+		      try {
+		         ps = conn.prepareStatement(sql);
+		         ps.setInt(1, bmark.getU_no());
+		         ps.setInt(2, bmark.getStudy_no());
+
+		         ps.executeUpdate();
+
+		         conn.commit();
+		      } catch (SQLException e) {
+		         try {
+		            conn.rollback();
+		         } catch (SQLException e1) {
+		            // TODO Auto-generated catch block
+		            e1.printStackTrace();
+		         }
+		         e.printStackTrace();
+		      } finally {
+		         try {
+		            if (rs != null)
+		               rs.close();
+		            if (ps != null)
+		               ps.close();
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
+			
+		}
 	
 }

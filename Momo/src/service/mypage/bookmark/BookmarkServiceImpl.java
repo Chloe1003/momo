@@ -40,7 +40,19 @@ public class BookmarkServiceImpl implements BookmarkService {
 		return bmDao.selectBookmarkPagingList(u_no, paging);
 	}
 
+	//준환추가(AJAX)
+	@Override
+	public void insertBookmark(Bookmark bookmarks) {
+		bmDao.insertBookmark(bookmarks);
+			
+	}
 	
+	//준환추가(AJAX)
+	@Override
+	public void deleteBookmark(Bookmark bmark) {
+		bmDao.deleteBookmark(bmark);
+			
+	}
 
 
 }

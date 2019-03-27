@@ -172,12 +172,15 @@ public class TeamDaoImpl implements TeamDao{
 
 	@Override
 	public List selectPagingList(Paging paging) {
+	
 		
 		//sql작성
 		String sql = "";
 		sql+="select * from (";
 		sql+=" select rownum rnum, B.* from(";
-		sql+=" select * from studyboard ";
+		sql+=" select u.u_no, u.u_name, s.sb_no, s.study_no, s.sb_content, s.file_no, s.sb_date";
+		sql+=" from studyboard s, users u";
+		sql+=" where u.u_no=s.u_no";
 		sql+=" order by sb_no desc";
 		sql+=" ) B";
 		sql+=" order by rnum";
@@ -198,13 +201,14 @@ public class TeamDaoImpl implements TeamDao{
 			while(rs.next())
 			{
 				StudyBoard board = new StudyBoard();
-				
+			
 				board.setStudy_no(rs.getInt("study_no"));
 				board.setU_no(rs.getInt("u_no"));
 				board.setSb_content(rs.getString("sb_content"));
 				board.setFile_no(rs.getInt("file_no"));
 				board.setSb_date(rs.getDate("sb_date"));
 				board.setSb_no(rs.getInt("sb_no"));
+				board.setU_name(rs.getString("u_name"));
 					
 				boardList.add(board);
 			}

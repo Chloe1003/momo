@@ -80,7 +80,7 @@
 						<td>${studyboard.sb_content }</td>   
 						<td><fmt:formatDate value="${studyboard.sb_date }" pattern="yyyy-MM-dd"/></td>
 						<td><a href="/file/down?file_no=${studyboard.file_no }"><img src="/images/down.png" alt="다운" /></a></td>
-						<td> ${studyboard.u_no}</td>
+						<td> ${studyboard.u_name}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -90,7 +90,7 @@
 	
 	
 		
-		<jsp:include page="../layout/paging.jsp"/>
+		<jsp:include page="../layout/teamBoardPaging.jsp"/>
 	
 		<div id="btnBox" class="btn pull-right">
 			<button id="btnWrite" class="btn btn-sm" style="color:#ffffff; background:#F67280">게시글 작성</button>

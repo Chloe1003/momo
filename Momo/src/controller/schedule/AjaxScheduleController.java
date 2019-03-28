@@ -32,6 +32,12 @@ public class AjaxScheduleController extends HttpServlet {
 		
 		String start= (String) req.getParameter("start");
 		String end= (String)req.getParameter("end");
+		
+		double lat = Double.parseDouble(req.getParameter("placeLat"));
+		double lng = Double.parseDouble(req.getParameter("placeLng"));
+		String place = (String)req.getParameter("placeTitle");
+		String address = (String)req.getParameter("placeAddress");
+		
 
 //		System.out.println(no);
 		System.out.println(title);
@@ -43,6 +49,12 @@ public class AjaxScheduleController extends HttpServlet {
 		sche.setS_content(content);
 		sche.setS_start(start);
 		sche.setS_end(end);
+		
+		sche.setS_place(place);
+		sche.setP_address(address);
+		sche.setP_lat(lat);
+		sche.setP_lng(lng);
+		
 		
 		scheService.Insert(sche);
 		

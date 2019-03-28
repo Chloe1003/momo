@@ -11,30 +11,27 @@ import dto.Schedule;
 
 public interface ScheduleService {
 
-	//¿äÃ»ÆÄ¶ó¹ÌÅÍ µ¥ÀÌÅÍ¸¦ °´Ã¼È­ÇÏ¿© ¹ÝÈ¯
+	//ï¿½ï¿½Ã»ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½Ã¼È­ï¿½Ï¿ï¿½ ï¿½ï¿½È¯
 	public Schedule getParam(HttpServletRequest req, HttpServletResponse resp);
 	
-	// faq ÀüÃ¼ Á¶È¸
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½È¸
 	public List<Schedule> selectAll();
 
-	// faq °øÁö»çÇ× »ó¼¼Á¶È¸ ¹ÝÈ¯
-	public Schedule selectScheByScheno(Schedule faqview);
 
-	// faq »èÁ¦ ¹ÝÈ¯
-	public int delectFaqByFaqno(Schedule faqdel);
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
+	public int delete(Schedule schedel);
 	
 	
-
-	// ÃÑ °Ô½Ã±Û ¼ö ¹ÝÈ¯
-	public int selectCntFaq();
-
-	// ÀÏÁ¤ µî·Ï
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public void Insert(Schedule scheinsert);
 
-	// FAQ ¼öÁ¤
-	public void update(Schedule faqup);
+//	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+//	public void update(Schedule faqup);
 	
-	// FAQ »èÁ¦
-	public int delectScheByFaqdno(Schedule faqdel);
+	// yn start -------------------------------
+	public Schedule getLatestSchedule(int study_no);
+
+	public int getDday(int study_no);
+
 
 }

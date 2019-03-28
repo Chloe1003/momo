@@ -7,25 +7,25 @@ import dto.Schedule;
 
 public interface ScheduleDao {
 
-	// faq ÀüÃ¼ Á¶È¸
+	// faq ï¿½ï¿½Ã¼ ï¿½ï¿½È¸
 	public List<Schedule> selectAll();
 
-	// faq °øÁö»çÇ× »ó¼¼Á¶È¸ ¹ÝÈ¯
-	public Schedule selectScheByScheno(Schedule faqview);
 
-	// faq »èÁ¦ ¹ÝÈ¯
-	public int delectFaqByFaqno(Schedule faqdel);
-
-	// ÃÑ °Ô½Ã±Û ¼ö ¹ÝÈ¯
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
+	public int scheDelect(Schedule schedel) ;
+	
+	// ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ ï¿½ï¿½È¯
 	public int selectCntFaq();
 
-	// FAQ µî·Ï
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public void scheInsert(Schedule scheinsert);
 
-	// FAQ ¼öÁ¤
+	// FAQ ï¿½ï¿½ï¿½ï¿½
 	public void update(Schedule faqup);
 	
-	// FAQ »èÁ¦
-	public int delectScheByFaqdno(Schedule faqdel);
-
+	// yn start ----------------------------------------
+	public Schedule selectLatestSchedule(int study_no);
+	
+	public int getDday(int study_no);
+	// -------------------------------------------------
 }

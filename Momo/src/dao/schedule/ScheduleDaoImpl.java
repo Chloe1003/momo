@@ -10,38 +10,40 @@ import java.util.List;
 
 import dto.Faq;
 import dto.Schedule;
+import dto.Study;
 import util.DBConn;
 
 public class ScheduleDaoImpl implements ScheduleDao {
 
-	// DBø¨∞· ∞¥√º
 	private Connection conn = DBConn.getConnection();
-
+	private PreparedStatement ps = null;
+	private ResultSet rs = null;
+	
 	@Override
 	public List<Schedule> selectAll() {
 
-		// ¿¸√º ¡∂»∏ ƒı∏Æ
+		// Ï†ÑÏ≤¥ Ï°∞Ìöå ÏøºÎ¶¨
 		String sql = "";
 		sql += "SELECT * FROM schedule";
 		sql += " ORDER BY s_no";
 
-		// DB ∞¥√º
+		// DB Í∞ùÏ≤¥
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		// √÷¡æ ¡∂»∏ ∞·∞˙ ¥„¿ª List
+		// ÏµúÏ¢Ö Ï°∞Ìöå Í≤∞Í≥º Îã¥ÏùÑ List
 		List<Schedule> list = new ArrayList<>();
 
 		try {
-			// DB¿€æ˜
+			// DBÏûëÏóÖ
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 
-			// ¿¸√º¡∂»∏ ∞·∞˙ ¥„±‚
+			// Ï†ÑÏ≤¥Ï°∞Ìöå Í≤∞Í≥º Îã¥Í∏∞
 			while (rs.next()) {
 				Schedule s = new Schedule();
 
-				// ResultSet¿« ∞·∞˙ «‡ «œ≥™æø DTOø° ¿˙¿Â
+				// ResultSetÏùò Í≤∞Í≥º Ìñâ ÌïòÎÇòÏî© DTOÏóê Ï†ÄÏû•
 
 				s.setS_no(rs.getInt("s_no"));
 				s.setS_title(rs.getString("s_title"));
@@ -63,7 +65,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
 				s.setP_address(rs.getString("p_address"));
 				
 				
-				// ¡∂»∏∞·∞˙∏¶ List∑Œ ª˝º∫
+				// Ï°∞ÌöåÍ≤∞Í≥ºÎ•º ListÎ°ú ÏÉùÏÑ±
 				list.add(s);
 			}
 
@@ -71,7 +73,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				// DB∞¥√º ¥›±‚
+				// DBÍ∞ùÏ≤¥ Îã´Í∏∞
 				if (rs != null)
 					rs.close();
 				if (ps != null)
@@ -82,93 +84,38 @@ public class ScheduleDaoImpl implements ScheduleDao {
 			}
 		}
 
-		// ¿¸√º¡∂»∏ ∞·∞˙ π›»Ø
+		// Ï†ÑÏ≤¥Ï°∞Ìöå Í≤∞Í≥º Î∞òÌôò
 		return list;
 	}
 
-//	@Override
-//	public Faq selectFaqBFaqyFaqno(Faq faqview) {
-//
-//		// ¿¸√º ¡∂»∏ ƒı∏Æ
-//		String sql = "";
-//		sql += "SELECT * FROM faq";
-//		sql += " WHERE faq_no= ?";
-//
-//		// DB ∞¥√º
-//		PreparedStatement ps = null;
-//		ResultSet rs = null;
-//
-//		// ¡∂»∏ ∞·∞˙ ¥„¿ª DTO
-//		Faq f = new Faq();
-//
-//		try {
-//			// DB¿€æ˜
-//			ps = conn.prepareStatement(sql);
-//			ps.setInt(1, faqview.getFaq_no());
-//			rs = ps.executeQuery();
-//
-//			// ∞·∞˙ ¥„±‚
-//			while (rs.next()) {
-//
-//				// ResultSet¿« ∞·∞˙ «‡ «œ≥™æø DTOø° ¿˙¿Â
-//
-//				// ResultSet¿« ∞·∞˙ «‡ «œ≥™æø DTOø° ¿˙¿Â
-//				f.setFaq_no(rs.getInt("faq_no"));
-//				f.setFaq_cate(rs.getString("faq_cate"));
-//				f.setFaq_qusetion(rs.getString("faq_qusetion"));
-//				f.setFaq_answer(rs.getString("faq_answer"));
-//				f.setFaq_date(rs.getDate("faq_date"));
-//
-//				// ¡∂»∏∞·∞˙∏¶ List∑Œ ª˝º∫
-//
-//			}
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			try {
-//				// DB∞¥√º ¥›±‚
-//				if (rs != null)
-//					rs.close();
-//				if (ps != null)
-//					ps.close();
-//
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//
-//		// ¿¸√º¡∂»∏ ∞·∞˙ π›»Ø
-//		return f;
-//	}
+
 
 	@Override
-	public int selectCntFaq() {
+	public int scheDelect(Schedule schedel) {
+		// Ï†ÑÏ≤¥ Ï°∞Ìöå ÏøºÎ¶¨
+		int result = 1;
 
-		// ¿¸√º ¡∂»∏ ƒı∏Æ
 		String sql = "";
-		sql += "SELECT COUNT(*) FROM faq";
+		sql += "DELETE FROM schedule";
+		sql += " WHERE s_no= ?";
 
-		// DB ∞¥√º
+		// DB Í∞ùÏ≤¥
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		// √÷¡æ ¡∂»∏ ∞·∞˙ ¥„¿ª ∫Øºˆ
-		int cnt = 0;
+		// Ï°∞Ìöå Í≤∞Í≥º Îã¥ÏùÑ DTO
 
 		try {
-			// DB¿€æ˜
+			// DBÏûëÏóÖ
 			ps = conn.prepareStatement(sql);
-			rs = ps.executeQuery();
-
-			rs.next();
-			cnt = rs.getInt(1);
+			ps.setInt(1, schedel.getS_no());
+			result = ps.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				// DB∞¥√º ¥›±‚
+				// DBÍ∞ùÏ≤¥ Îã´Í∏∞
 				if (rs != null)
 					rs.close();
 				if (ps != null)
@@ -179,81 +126,43 @@ public class ScheduleDaoImpl implements ScheduleDao {
 			}
 		}
 
-		// ¿¸√º ∞‘Ω√±€ ºˆ π›»Ø
-		return cnt;
+		// Ï†ÑÏ≤¥Ï°∞Ìöå Í≤∞Í≥º Î∞òÌôò
+		return result;
 	}
-
-//	@Override
-//	public int delectFaqByFaqno(Faq faqdel) {
-//		// ¿¸√º ¡∂»∏ ƒı∏Æ
-//		int result = 0;
-//
-//		String sql = "";
-//		sql += "DELETE FROM faq";
-//		sql += " WHERE faq_no= ?";
-//
-//		// DB ∞¥√º
-//		PreparedStatement ps = null;
-//		ResultSet rs = null;
-//
-//		// ¡∂»∏ ∞·∞˙ ¥„¿ª DTO
-//
-//		try {
-//			// DB¿€æ˜
-//			ps = conn.prepareStatement(sql);
-//			ps.setInt(1, faqdel.getFaq_no());
-//			result = ps.executeUpdate();
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			try {
-//				// DB∞¥√º ¥›±‚
-//				if (rs != null)
-//					rs.close();
-//				if (ps != null)
-//					ps.close();
-//
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//
-//		// ¿¸√º¡∂»∏ ∞·∞˙ π›»Ø
-//		return result;
-//	}
 
 	@Override
 	public void scheInsert(Schedule scheinsert) {
 
 		PreparedStatement ps = null;
-		ResultSet rs = null;
-		String sql = " ";
-		sql += "INSERT INTO schedule";
-		sql += " (s_no, study_no, s_title, s_content, s_cname, s_date, s_partname, s_place";
-		sql += " ,s_rdate, s_name, s_start, s_end, p_lat, p_lng, p_address)";
-		sql += " VALUES( schedule_SEQ.NEXTVAL, 1, ?, ?, 'æ∆π´∞≥', sysdate, '±Ë¡ÿ»Ø', 'ø™ªÔ', sysdate,'±Ë¡ÿ»Ø',?,?,?,?,?)";
+	      ResultSet rs = null;
+	      String sql = " ";
+	      sql += "INSERT INTO schedule";
+	      sql += " (s_no, study_no, s_title, s_content, s_cname, s_date, s_partname, s_place";
+	      sql += " ,s_rdate, s_name, s_start, s_end, p_lat, p_lng, p_address)";
+	      sql += " VALUES( schedule_SEQ.NEXTVAL, 1, ?, ?, 'ÏïÑÎ¨¥Í∞ú', sysdate, 'ÍπÄÏ§ÄÌôò', ?, sysdate,'ÍπÄÏ§ÄÌôò',?,?,?,?,?)";
 
-		try {
+	      try {
 
-			ps = conn.prepareStatement(sql);
+	         ps = conn.prepareStatement(sql);
 
-			ps.setString(1, scheinsert.getS_title());
-			ps.setString(2, scheinsert.getS_content());
-			ps.setString(3,  scheinsert.getS_start());
-			ps.setString(4,  scheinsert.getS_end());
-			
-			ps.setDouble(5,  scheinsert.getP_lat());
-			ps.setDouble(6,  scheinsert.getP_lng());
-			ps.setString(7,  scheinsert.getP_address());
+	         ps.setString(1, scheinsert.getS_title());
+	         ps.setString(2, scheinsert.getS_content());
+	         
+	         ps.setString(3,  scheinsert.getS_place());
+	         
+	         ps.setString(4,  scheinsert.getS_start());
+	         ps.setString(5,  scheinsert.getS_end());
+	         ps.setDouble(6,  scheinsert.getP_lat());
+	         ps.setDouble(7,  scheinsert.getP_lng());
+	         ps.setString(8,  scheinsert.getP_address());
 
-			ps.executeUpdate();
-
+	         ps.executeUpdate();
+	         
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				// DB∞¥√º ¥›±‚
+				// DBÍ∞ùÏ≤¥ Îã´Í∏∞
 				if (rs != null)
 					rs.close();
 				if (ps != null)
@@ -266,7 +175,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
 
 	}
 
-	// ºˆ¡§ «‘ºˆ
+	// ÏàòÏ†ï Ìï®Ïàò
 	public void update(Faq faqup) {
 
 		PreparedStatement ps = null;
@@ -303,16 +212,12 @@ public class ScheduleDaoImpl implements ScheduleDao {
 
 
 	@Override
-	public Schedule selectScheByScheno(Schedule faqview) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int delectFaqByFaqno(Schedule faqdel) {
+	public int selectCntFaq() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
 
 	@Override
 	public void update(Schedule faqup) {
@@ -320,51 +225,92 @@ public class ScheduleDaoImpl implements ScheduleDao {
 		
 	}
 
+	// yn start -------------------------------------------------------------------------
+
 	@Override
-	public int delectScheByFaqdno(Schedule faqdel) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Schedule selectLatestSchedule(int study_no) {
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql += "	SELECT rownum rnum, A.* FROM(";
+		sql += "		SELECT s_start, s_end, s_place, p_address, s_title, p_lng, p_lat";
+		sql += " 		FROM schedule";
+		sql += " 	WHERE(s_start - sysdate) > 0 AND study_no=1";
+		sql += "	ORDER BY (sysdate - s_start) DESC ";
+		sql += " 	) A";
+		sql += " 	ORDER BY rnum";
+		sql += " ) R";
+		sql += " WHERE rnum= 1";
+		
+		Schedule sc = new Schedule();	
+
+		try {
+			ps = conn.prepareStatement(sql);
+//			ps.setInt(1, study_no);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				sc.setS_start(rs.getString("s_start"));
+				sc.setS_end(rs.getString("s_end"));
+				sc.setS_place(rs.getString("s_place"));
+				sc.setP_address(rs.getString("p_address"));
+				sc.setS_title(rs.getString("s_title"));
+				sc.setP_lat(rs.getDouble("p_lat"));
+				sc.setP_lng(rs.getDouble("p_lng"));
+			};
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}	
+		
+		return sc;
 	}
-	
-//	@Override
-//	public int delectFaqByFaqdno(Faq faqdel) {
-//		//¿¸√º ¡∂»∏ ƒı∏Æ
-//		
-//		        int result = 0;
-//		
-//				String sql = "";
-//				sql += "DELETE FROM faq";
-//				sql += " WHERE faq_no= ?";
-//				
-//				//DB ∞¥√º
-//				PreparedStatement ps = null; 
-//				ResultSet rs = null;
-//				
-//				//¡∂»∏ ∞·∞˙ ¥„¿ª DTO
-//				Faq f = new Faq();
-//				
-//				try {
-//					//DB¿€æ˜
-//					ps = conn.prepareStatement(sql);
-//					ps.setInt(1, faqdel.getFaq_no());
-//					result = ps.executeUpdate();
-//					
-//					
-//				} catch (SQLException e) {
-//					e.printStackTrace();
-//				} finally {
-//					try {
-//						//DB∞¥√º ¥›±‚
-//						if(rs!=null)	rs.close();
-//						if(ps!=null)	ps.close();
-//						
-//					} catch (SQLException e) {
-//						e.printStackTrace();
-//					}
-//				}
-//				
-//				return result;
-//				
-//	}
+
+
+
+	@Override
+	public int getDday(int study_no) {
+		String sql = "";
+		sql +="SELECT trunc(STUDY_PERIOD) - trunc(SYSDATE) FROM study";
+		sql += " WHERE study_no=1";
+		
+		int dDay=0;
+
+		try {
+			ps = conn.prepareStatement(sql);
+//			ps.setInt(1, study_no);
+			
+			rs = ps.executeQuery();
+			
+			rs.next();
+			
+			dDay = rs.getInt(1);	
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}	
+		
+		return dDay;
+	}
+
+
+
+	// -----------------------------------------------------------
 
 }

@@ -21,9 +21,9 @@
 						</div>
 						<div class="caption col-sm-9">
 							<span class="label label-default"
-								style="float: right; font-size: 110%;">D-<span id="d-day"></span></span>
+								style="float: right; font-size: 110%;">D-<span id="d-day">${d_day }</span></span>
 							<h3>${study.study_name }</h3>
-							<p>${study.st_code }</p>
+							<p>${study.st_subcate }</p>
 							<p>지역: ${study.study_region }</p>
 							<p>인원: ${teammate.size() }명</p>
 							<p>기간: ~ ${study.study_period }</p>
@@ -34,13 +34,18 @@
         
           <div class="thumbnail col-sm-12" style="margin-top: 20px; box-shadow: none;padding: 15px;">
           <p><strong>다음 스터디 일정</strong></p>
+<%--           <c:if test="${schedule.size()>0 }"> --%>
           <div id="map" class="col-sm-4" style="width:350px;height:250px;"></div>
           <div class="col-sm-4">
-          	<div id="study_date">날짜: ${schedule.s_date }</div>
-          	<div id="study_time">시간: ${schedule.s_date }</div>
-          	<div id="study_location">장소: ${schedule.s_location }</div>
+          	<p>제목: ${schedule.s_title }</p>
+          	<p>날짜: ${schedule.s_start }</p>
+          	<p>장소: ${schedule.p_address }, ${schedule.s_place }</p>
 <%--           	<div id="study_attend">참석자: <c:forEach var=i begin=0 end=${attend.size()-1 }>${attend.get(i).u_name } </c:forEach></div> --%>
-          </div>
+<!--           </div> -->
+<%--           </c:if> --%>
+<%--           <c:if test="${schedule.size() = 0 }"> --%>
+<!--           <div style="text-align:center;margin: 10px;">아직 다음 일정을 설정하지 않으셨네요!</div> -->
+<%--           </c:if> --%>
           </div>
    			
    			
@@ -58,7 +63,7 @@
 			<script>
 				var container = document.getElementById('map');
 				var options = {
-					center: new daum.maps.LatLng(33.450701, 126.570667),
+					center: new daum.maps.LatLng('${schedule.p_lat }', '${schedule.p_lng }'),
 					level: 3
 				};
 				var map = new daum.maps.Map(container, options);
@@ -74,7 +79,7 @@
 				map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
 		
 				// 마커가 표시될 위치입니다 
-				var markerPosition  = new daum.maps.LatLng(33.450701, 126.570667); 
+				var markerPosition  = new daum.maps.LatLng('${schedule.p_lat }', '${schedule.p_lng }'); 
 
 				// 마커를 생성합니다
 				var marker = new daum.maps.Marker({
@@ -92,9 +97,7 @@
 // // 			         window.open("/mypage/message/send?sender_no="+u_no+"&receiver_no="+receiver_no+"&type=send", "window팝업", "width=400, height=350, menubar=no, status=no, toolbar=no");
 // 			      });
 				
-				function dDayCalc(){
-					var 
-				}
+				
 			</script>
    			
 

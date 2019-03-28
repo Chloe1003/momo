@@ -17,18 +17,18 @@ public class ScheduleServiceImpl implements ScheduleService {
 	@Override
 	public Schedule getParam(HttpServletRequest req, HttpServletResponse resp) {
 		
-		//¿äÃ»ÆÄ¶ó¹ÌÅÍ Á¤º¸¸¦ ÀúÀåÇÒ DTO°´Ã¼
+		//ï¿½ï¿½Ã»ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DTOï¿½ï¿½Ã¼
 		Schedule sche = new Schedule();
 		
-		//¿äÃ»ÆÄ¶ó¹ÌÅÍ ¹Þ±â
+		//ï¿½ï¿½Ã»ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ ï¿½Þ±ï¿½
 		String s_no= req.getParameter("s_no");
 		
-		//nullÀÌ³ª ""ÀÌ ¾Æ´Ï¸é int·Î º¯È¯ÇÏ¿© DTO¿¡ ÀúÀå
+		//nullï¿½Ì³ï¿½ ""ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ intï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ï¿ï¿½ DTOï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		if( s_no!= null && !"".equals(s_no) ) {
 			sche.setS_no((Integer.parseInt(s_no)));
 		}
 
-		//¿äÃ»ÆÄ¶ó¹ÌÅÍ°¡ °´Ã¼·Î º¯È¯µÈ DTO ¹ÝÈ¯
+		//ï¿½ï¿½Ã»ï¿½Ä¶ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ DTO ï¿½ï¿½È¯
 		return sche;
 	}
 
@@ -38,24 +38,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 		return schedao.selectAll();
 	}
 
-	@Override
-	public Schedule selectScheByScheno(Schedule faqview) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
-	@Override
-	public int delectFaqByFaqno(Schedule faqdel) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int selectCntFaq() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	
 	@Override
 	public void Insert(Schedule scheinsert) {
 		
@@ -63,16 +48,27 @@ public class ScheduleServiceImpl implements ScheduleService {
 	}
 
 	@Override
-	public void update(Schedule faqup) {
-		// TODO Auto-generated method stub
+	public int delete(Schedule schedel) {
+	    
+		return schedao.scheDelect(schedel);
+	}
+
+	// yn start -------------------------------------
+	@Override
+	public Schedule getLatestSchedule(int study_no) {
 		
+		return schedao.selectLatestSchedule(study_no);
 	}
 
 	@Override
-	public int delectScheByFaqdno(Schedule faqdel) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getDday(int study_no) {
+		return schedao.getDday(study_no);
 	}
+	
+	//--------------------------------------------------
+
+	
+
 
 
 }

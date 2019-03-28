@@ -39,7 +39,7 @@ public class TeamDaoImpl implements TeamDao{
 		sql+=" ON S.study_no=T.study_no";
 		sql+=" JOIN applystate A";
 		sql+=" ON A.ts_statecode";
-		sql+=" WHERE T.study_no=? AND T.ts_statecode=2 AND T.ss_yesno='n'";
+		sql+=" WHERE T.study_no=1 AND T.ts_statecode=2 AND T.ss_yesno='n'";
 		sql+=" ORDER BY U.u_name";
 		
 		List<Teammate> tList = new ArrayList<>();
@@ -48,7 +48,7 @@ public class TeamDaoImpl implements TeamDao{
 			//sql 수행
 			ps = conn.prepareStatement(sql);
 			
-			ps.setInt(1, study_no);
+//			ps.setInt(1, study_no);
 					
 			rs = ps.executeQuery();
 				
@@ -92,14 +92,14 @@ public class TeamDaoImpl implements TeamDao{
 		sql += " ON U.u_no = S.u_no";
 		sql += " JOIN studycate C";
 		sql += " ON C.st_code=S.st_code";
-		sql += " WHERE S.study_no=?";
+		sql += " WHERE S.study_no=1";
 
 		// study媛앹껜
 		Study study = new Study();
 
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, study_no);
+//			ps.setInt(1, study_no);
 
 			rs = ps.executeQuery();
 
